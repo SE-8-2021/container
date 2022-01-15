@@ -1,4 +1,5 @@
 # PVS deploy
+#### [Visit Official PVS Online](https://pvs.xcc.tw)
 Self-host a production-optimized PVS in any place.
 
 Note that this deployment is not for development use.
@@ -13,7 +14,7 @@ Ensure Docker has already been installed in your environment.
 1. clone this repository.
 2. create your `.env` file in the project root. There's an example env file you may use in this repository.
 3. `docker compose up -d`
-4. The front end will be exposed on the `3000` port, and the backend will be the `9100` port.
+4. The front end will be exposed on the `4344` port (by default), and the backend will be the `9100` port (by default).
 
 ### Images on docker hub
 
