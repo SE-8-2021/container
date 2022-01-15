@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  pvs-frontend:
+    image: xanonymous/pvs-frontend
+    ports:
+      - '4344:3000'
+    restart: unless-stopped
+
+  pvs-backend:
+    image: xanonymous/pvs-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "9100:9100"
+    networks:
+      - pvs_net
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_URL=${DB_URL}
+      - PVS_DB_USER=${PVS_DB_USER}
+      - PVS_DB_PASS=${PVS_DB_PASS}
+      - PVS_GITHUB_TOKEN=${PVS_GITHUB_TOKEN}
+      - PVS_SONAR_TOKEN=${PVS_SONAR_TOKEN}
+      - PVS_GITLAB_TOKEN=${PVS_GITLAB_TOKEN}
+      - PVS_TRELLO_KEY=${PVS_TRELLO_KEY}
+      - PVS_TRELLO_TOKEN=${PVS_TRELLO_TOKEN}
+      - JWT_SALT=${JWT_SALT}
+      - MODE=${MODE}
+    restart: always
+
+  db:
+    image: postgres:14-alpine
+    ports:
+      - "5432"
+    networks:
+      - pvs_net
+    environment:
+      - POSTGRES_USER=${PVS_DB_USER}
+      - POSTGRES_PASSWORD=${PVS_DB_PASS}
+    volumes:
+      - ./source/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  pvs_net:
