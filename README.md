@@ -5,15 +5,15 @@ Note that this deployment is not for development use.
 
 ### Before start
 
-Ensure Docker has already be installed in your enviroment.
+Ensure Docker has already been installed in your environment.
 [Install guide](https://docs.docker.com/get-docker/)
 
 ### Deploy steps
 
 1. clone this repository.
-2. create your `.env` file in project root. There's an example env file you may use in this repository.
+2. create your `.env` file in the project root. There's an example env file you may use in this repository.
 3. `docker compose up -d`
-4. The front end will be exposed on `3000` port, and the backend will be `9100` port.
+4. The front end will be exposed on the `3000` port, and the backend will be the `9100` port.
 
 ### Images on docker hub
 
