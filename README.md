@@ -15,6 +15,7 @@ Ensure Docker has already been installed in your environment.
 2. create your `.env` file in the project root. There's an example env file you may use in this repository.
 3. `docker compose up -d`
 4. The front end will be exposed on the `4344` port (by default), and the backend will be the `9100` port (by default).
+5. Now you may use some reverse-proxy server to host PVS, we recommend using [Caddy](https://caddyserver.com/v2).
 
 ### Images on docker hub
 
